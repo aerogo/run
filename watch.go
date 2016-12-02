@@ -10,7 +10,9 @@ import (
 
 func watch() {
 	c := make(chan notify.EventInfo, 1)
-	if err := notify.Watch("./...", c, notify.InCloseWrite, notify.InMovedFrom, notify.InMovedTo, notify.Remove); err != nil {
+	err := notify.Watch("./...", c, notify.InCloseWrite, notify.InMovedFrom, notify.InMovedTo, notify.Remove)
+
+	if err != nil {
 		log.Fatal(err)
 	}
 

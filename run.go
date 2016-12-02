@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -13,28 +12,13 @@ var server *exec.Cmd
 
 func restart() {
 	stopServer()
-
-	var err error
-
-	err = pack()
-
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	err = build()
-
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	server = run()
+	pack()
+	build()
+	run()
 	watch()
 }
 
-func run() *exec.Cmd {
+func run() {
 	mainExecutable := filepath.Base(cwd)
 
 	cmd := exec.Command("./" + mainExecutable)
@@ -44,8 +28,9 @@ func run() *exec.Cmd {
 
 	if err != nil {
 		color.Red("Couldn't start the server.")
-		return nil
+		server = nil
+		return
 	}
 
-	return cmd
+	server = cmd
 }
