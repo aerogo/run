@@ -3,18 +3,23 @@ package main
 import (
 	"os"
 	"os/exec"
+	"strconv"
+	"time"
 
 	"github.com/fatih/color"
 )
 
-var goBuildMessage = color.New(color.Faint).Sprint(`Recompiling with "go build"...`)
+var faint = color.New(color.Faint).SprintFunc()
+var goBuildMessage = faint(`go build...`)
 
 func build() error {
-	println(goBuildMessage)
+	os.Stdout.WriteString(goBuildMessage)
 
 	cmd := exec.Command("go", "build")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+
+	start := time.Now()
 	err := cmd.Start()
 
 	if err != nil {
@@ -23,6 +28,9 @@ func build() error {
 	}
 
 	waitErr := cmd.Wait()
+	duration := time.Since(start)
+	ms := strconv.Itoa(int(duration.Nanoseconds() / int64(1000000)))
+	println(faint(ms + " ms"))
 
 	if waitErr != nil {
 		return waitErr
