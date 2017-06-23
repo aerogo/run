@@ -7,7 +7,11 @@ import (
 	"github.com/fatih/color"
 )
 
+var goBuildMessage = color.New(color.Faint).Sprint(`Recompiling with "go build"...`)
+
 func build() error {
+	println(goBuildMessage)
+
 	cmd := exec.Command("go", "build")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

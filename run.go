@@ -11,10 +11,13 @@ import (
 var server *exec.Cmd
 
 func restart() {
-	stopServer()
 	pack()
-	build()
-	run()
+
+	if build() == nil {
+		stopServer()
+		run()
+	}
+
 	watch()
 }
 
