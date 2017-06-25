@@ -10,12 +10,13 @@ import (
 )
 
 var faint = color.New(color.Faint).SprintFunc()
-var goBuildMessage = faint(`go build...`)
+var goBuildMessage = faint(`go build -v`)
 
 func build() error {
-	os.Stdout.WriteString(goBuildMessage)
+	println("--------------------------------------------------------------------------------")
+	println(goBuildMessage)
 
-	cmd := exec.Command("go", "build")
+	cmd := exec.Command("go", "build", "-v")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
@@ -30,6 +31,8 @@ func build() error {
 	waitErr := cmd.Wait()
 	duration := time.Since(start)
 	ms := strconv.Itoa(int(duration.Nanoseconds() / int64(1000000)))
+
+	println()
 	println(faint(ms + " ms"))
 
 	if waitErr != nil {
