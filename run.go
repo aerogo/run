@@ -12,9 +12,10 @@ var server *exec.Cmd
 
 func restart() {
 	pack()
+	err := build()
+	stopServer()
 
-	if build() == nil {
-		stopServer()
+	if err == nil {
 		run()
 	}
 

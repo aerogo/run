@@ -25,9 +25,9 @@ func watch() {
 	}
 
 	for fileEvent := range c {
-		if server == nil {
-			continue
-		}
+		// if server == nil {
+		// 	continue
+		// }
 
 		relPath, _ := filepath.Rel(cwd, fileEvent.Path())
 

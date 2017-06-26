@@ -10,16 +10,15 @@ import (
 )
 
 var faint = color.New(color.Faint).SprintFunc()
-var goBuildMessage = faint(`go build -v`)
+var goBuildMessage = faint(`go build`)
 
 func build() error {
 	println("--------------------------------------------------------------------------------")
 	println(goBuildMessage)
 
-	cmd := exec.Command("go", "build", "-v")
+	cmd := exec.Command("go", "build")
 	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
+	cmd.Stderr = &ColoredWriter{os.Stderr, color.New(color.FgRed)}
 	start := time.Now()
 	err := cmd.Start()
 
