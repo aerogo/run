@@ -19,7 +19,7 @@ func interceptSignals() {
 
 func stopServer() {
 	if server != nil && server.Process != nil {
-		server.Process.Kill()
+		server.Process.Signal(os.Interrupt)
 		server = nil
 	}
 }
