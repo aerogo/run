@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 )
 
 func interceptSignals() {
@@ -19,7 +21,21 @@ func interceptSignals() {
 
 func stopServer() {
 	if server != nil && server.Process != nil {
-		server.Process.Signal(os.Interrupt)
+		err := server.Process.Signal(os.Interrupt)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		time.Sleep(50 * time.Millisecond)
+
+		err = server.Process.Kill()
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		time.Sleep(50 * time.Millisecond)
 		server = nil
 	}
 }
