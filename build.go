@@ -16,7 +16,7 @@ func build() error {
 	println("--------------------------------------------------------------------------------")
 	println(goBuildMessage)
 
-	cmd := exec.Command("go", "build")
+	cmd := exec.Command("go", "build", "-i")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = &ColoredWriter{os.Stderr, color.New(color.FgRed)}
 	start := time.Now()
