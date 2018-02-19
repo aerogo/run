@@ -1,4 +1,3 @@
-// +build !linux, darwin
 package main
 
 import (
@@ -19,7 +18,7 @@ var watchExtensions = map[string]bool{
 
 func watch() {
 	c := make(chan notify.EventInfo, 1)
-	err := notify.Watch("./...", c, notify.Remove, notify.FSEventsMount, notify.FSEventsRenamed, notify.FSEventsRemoved)
+	err := notify.Watch("./...", c, notify.Write, notify.Rename, notify.Remove)
 
 	if err != nil {
 		log.Fatal(err)
