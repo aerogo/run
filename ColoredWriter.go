@@ -3,7 +3,7 @@ package main
 import (
 	"io"
 
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 // ColoredWriter writes everything in a single color

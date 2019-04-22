@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 func pack() error {

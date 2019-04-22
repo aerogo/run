@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 var faint = color.New(color.Faint).SprintFunc()
