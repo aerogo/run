@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 var server *exec.Cmd
