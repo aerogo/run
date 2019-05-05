@@ -3,7 +3,7 @@ module github.com/aerogo/run
 go 1.12
 
 require (
-	github.com/akyoto/color v1.8.2
+	github.com/akyoto/color v1.8.3
 	github.com/rjeczalik/notify v0.9.2
-	golang.org/x/sys v0.0.0-20190429190828-d89cdac9e872 // indirect
+	golang.org/x/sys v0.0.0-20190502175342-a43fa875dd82 // indirect
 )
