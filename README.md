@@ -8,6 +8,8 @@
 
 Runs an [Aero](https://github.com/aerogo/aero) project and restarts on code/template/style changes.
 
+![Preview](docs/preview.png)
+
 ## Requirements
 
 [pack](https://github.com/aerogo/pack) needs to be installed:

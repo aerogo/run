@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"strconv"
@@ -9,33 +11,36 @@ import (
 	"github.com/akyoto/color"
 )
 
-var faint = color.New(color.Faint).SprintFunc()
-var goBuildMessage = faint(`go build`)
+var (
+	faint          = color.New(color.Faint).SprintFunc()
+	goBuildMessage = faint(`go build`)
+)
 
 func build() error {
-	println("--------------------------------------------------------------------------------")
-	println(goBuildMessage)
+	fmt.Println(goBuildMessage)
 
 	cmd := exec.Command("go", "build")
 	cmd.Stdout = os.Stdout
-	cmd.Stderr = &ColoredWriter{os.Stderr, color.New(color.FgRed)}
+	cmd.Stderr = &coloredWriter{
+		Writer: os.Stderr,
+		color:  color.New(color.FgRed),
+	}
 	start := time.Now()
 	err := cmd.Start()
 
 	if err != nil {
-		color.Red("Couldn't run 'go build'. Make sure Go is correctly installed.")
-		return err
+		return errors.New("Couldn't run 'go build'. Make sure Go is correctly installed.")
 	}
 
-	waitErr := cmd.Wait()
+	err = cmd.Wait()
 	duration := time.Since(start)
 	ms := strconv.Itoa(int(duration.Nanoseconds() / int64(1000000)))
 
-	println()
-	println(faint(ms + " ms"))
+	fmt.Println()
+	fmt.Println(faint(ms + " ms"))
 
-	if waitErr != nil {
-		return waitErr
+	if err != nil {
+		return err
 	}
 
 	return nil

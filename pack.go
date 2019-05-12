@@ -1,10 +1,9 @@
 package main
 
 import (
+	"errors"
 	"os"
 	"os/exec"
-
-	"github.com/akyoto/color"
 )
 
 func pack() error {
@@ -14,15 +13,8 @@ func pack() error {
 	err := cmd.Start()
 
 	if err != nil {
-		color.Red("Couldn't run 'pack'. Make sure you ran 'go install github.com/aerogo/pack'")
-		return err
+		return errors.New("Couldn't run 'pack'. Make sure you ran 'go install github.com/aerogo/pack'")
 	}
 
-	waitErr := cmd.Wait()
-
-	if waitErr != nil {
-		return waitErr
-	}
-
-	return nil
+	return cmd.Wait()
 }
