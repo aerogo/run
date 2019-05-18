@@ -47,6 +47,8 @@ func run() error {
 		color.Red(packError.Error())
 	}
 
+	fmt.Println()
+
 	// Initial build
 	var buildError error
 
@@ -114,6 +116,7 @@ func run() error {
 					return err
 				}
 
+				fmt.Println()
 				return build()
 			}
 
