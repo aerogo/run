@@ -15,7 +15,7 @@ Runs an [Aero](https://github.com/aerogo/aero) project and restarts on code/temp
 [pack](https://github.com/aerogo/pack) needs to be installed:
 
 ```shell
-go get -u github.com/aerogo/pack
+go get -u github.com/aerogo/pack/...
 ```
 
 ## Installation
